@@ -45,28 +45,23 @@ def search():
     if s is None:
         return render_template('search.html')
 
-    if len(posts) <= 10:
-        count_posts = len(posts)
-        comments_count = get_comments_posts()
-        return render_template('search.html', posts=posts, count_posts=count_posts, comments_count=comments_count)
-    else:
-        posts = posts[:10]
-        count_posts = len(posts)
-        comments_count = get_comments_posts()
-        return render_template('search.html', posts=posts, count_posts=count_posts, comments_count=comments_count)
+
+    posts = posts[:10]
+    count_posts = len(posts)
+    comments_count = get_comments_posts()
+    return render_template('search.html', posts=posts, count_posts=count_posts, comments_count=comments_count)
 
 
 @app.route('/tag/<tags>')
 def get_tag(tags):
     tags_post = []
     post = get_post()
-    get_tag = tag(tags)  # tag
     comments_count = get_comments_posts()
     title = f'TAG/#{tags.upper()}'
     for i in post:
         if f'#{tags}' in i['content']:
             tags_post.append(i)
-    return render_template('tag.html', post=post, get_tag=get_tag, tags_post=tags_post, title=title, tags=tags,
+    return render_template('tag.html', post=post, tags_post=tags_post, title=title, tags=tags,
                                    comments_count=comments_count)
 
 
