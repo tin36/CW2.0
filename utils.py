@@ -70,11 +70,13 @@ def search_tag(word):
 
 def tag(word):
     '''поиск по тегам'''
-    words = word.split(" ")
-    for index, i in enumerate(words):
-        if i.startswith("#"):
+    tags_post = []
+    post = get_post()
 
-            return i
+    for i in post:
+        if f'#{word}' in i['content']:
+            tags_post.append(i)
+    return tags_post
 
 def user_feed_dict(user):
     '''поиск постов по пользователю'''
